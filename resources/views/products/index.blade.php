@@ -9,7 +9,6 @@
         <th>Name</th>
         <th>Image</th>
         <th>Brand</th>
-        <th>Category</th>
         <th>Price</th>
         <th>Description</th>
         <th>Status</th>
@@ -20,19 +19,13 @@
         @forelse ($products as $product )
         <tr>
             <td>{{$product->name}}</td>
-            <td><img width="50" src="{{url('storage/'.$product->image)}}"></td>
-            <td>{{$product->brand->price}}</td>
+            <td><img width='100' src="{{url('storage/'.$product->image)}}" alt=""></td>
+            <td>{{$product->brand->name}}</td>
 
-            <td>
-            
-              @foreach({{$product->$categories as $category}})
-       
-
-              @endforeach
-            </td>
+    
             <td>{{$product->price}}</td>
             <td>{{$product->description}}</td>
-            <td>{{$product['status']}}</td>
+            <td>{{$product->status}}</td>
             <td>
 
                 <a href="{{route('products.edit',$product)}}">

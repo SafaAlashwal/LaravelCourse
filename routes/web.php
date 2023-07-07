@@ -7,6 +7,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 //use Illuminate\Support\Facades\Route;
 
 
@@ -24,6 +26,16 @@ use App\Http\Controllers\ProductController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/changeLang/{Lang}', function (string $locale) {
+    if (!in_array($locale, ['en', 'ar'])) {
+        abort(400);
+    }
+    App::setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->name("changeLang");
+
 
 Route::get('/dashboard', function () {
     return view('posts.index');
@@ -53,6 +65,11 @@ Route::resource('categories',CategoryController::class); //->only([])   except([
 Route::resource('brands',BrandController::class);
 
 Route::resource('products',ProductController::class);
+
+Route::resource('roles',RoleController::class);
+
+Route::resource('users',UserController::class);
 });
+
 
 require __DIR__.'/auth.php';

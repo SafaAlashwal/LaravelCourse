@@ -12,6 +12,8 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded=['id','created_at'];
+
+    
     public function brand(){
         return $this->belongsTo(Brand::class);
     }

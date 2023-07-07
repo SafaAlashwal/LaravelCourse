@@ -82,8 +82,8 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-
-    'locale' => 'en',
+    'locale' => 'ar',
+   //'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
     | localized telephone numbers, street address information and more.
     |
     */
-
+    'faker_locale' => 'ar_EG',
     'faker_locale' => 'en_US',
 
     /*
@@ -168,6 +168,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
     ])->toArray(),
 
     /*

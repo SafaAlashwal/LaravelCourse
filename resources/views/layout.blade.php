@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{__('code')}}">
 
 <head>
 
@@ -17,13 +17,19 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
+       
     <!-- Custom styles for this template-->
     <link href={{asset("admin/css/sb-admin-2.min.css")}} rel="stylesheet">
+
+    @if(__("code")=='ar')
+
+    <link href={{asset("admin/css/sb-admin-2-rtl.css")}} rel="stylesheet">
+    @endif
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 
-<body id="page-top">
+<body id="page-top" dir="{{__('dir')}}">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -67,8 +73,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="{{Route('cards')}}">Cards</a>
+                        <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>
+                        <a class="collapse-item" href="{{Route('users.index')}}">Users</a>
                     </div>
                 </div>
             </li>
@@ -83,11 +89,17 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">store:</h6>
-                        <a class="collapse-item" href="{{route('categories.index')}}">Categories</a>
-                        <a class="collapse-item" href="{{route('brands.index')}}">Brands</a>
-                        <a class="collapse-item" href="{{route('products.index')}}">Products</a>
+                        <h6 class="collapse-header">{{__("auth.Store")}}:</h6>
 
+                        @can('access-categories')
+                        <a class="collapse-item" href="{{route('categories.index')}}">{{__("categories")}}</a>
+                        @endcan
+                        @can('access-brands')
+                        <a class="collapse-item" href="{{route('brands.index')}}">{{__("brands")}}</a>
+                        @endcan
+                        @can('access-products')
+                        <a class="collapse-item" href="{{route('products.index')}}">{{__('products')}}</a>
+                        @endcan
                     </div>
                 </div>
             </li>
