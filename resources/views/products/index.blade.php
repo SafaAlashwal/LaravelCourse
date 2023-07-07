@@ -20,7 +20,7 @@
         <tr>
             <td>{{$product->name}}</td>
             <td><img width='100' src="{{url('storage/'.$product->image)}}" alt=""></td>
-            <td>{{$product->brand->name}}</td>
+            <td>{{$product->brand?->name}}</td>
 
     
             <td>{{$product->price}}</td>

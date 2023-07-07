@@ -6,6 +6,9 @@ use App\Models\Brand;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
+use Illuminate\Support\Facades\DB;
+//use Spatie\Permission\Models\Permission;
+//use Database\Seeders\PermissionsSeeder;
 
 class BrandController extends Controller
 {
@@ -21,7 +24,7 @@ class BrandController extends Controller
          $this->middleware('permission:delete-brands', ['only' => ['destroy']]);
      }
 
-     
+
     public function index()
     {
         $brands=Brand::all();
