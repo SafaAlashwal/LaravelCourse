@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
+//use permission;
+use permission;
 use App\Models\Brand;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
-use Illuminate\Support\Facades\DB;
-//use Spatie\Permission\Models\Permission;
-//use Database\Seeders\PermissionsSeeder;
+
 
 class BrandController extends Controller
 {

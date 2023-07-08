@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class BaseAPIController extends Controller
 {
 
-    public function sendResponse($data, $message,$code = 200)
+    public function sendResponse($data, $message="",$code = 200)
     {
         $headers  = [
             'Content-Type' => 'application/json; charset=UTF-8',
