@@ -15,6 +15,14 @@ class CategoryController extends Controller
     public function index()
     {
         $categories=Category::all();
+        
+ //  $results = DB::select('select * from categories where id = :id', ['id' => 1]);
+//        $orders = DB::table('categories')
+//            ->select(DB::raw(1));
+//        $users = DB::table('users')
+//            ->whereExists($orders)
+//            ->get();
+//        return ($users);
         //$categories=Category::paginate(5);
 
         return view('categories.index',compact('categories'));

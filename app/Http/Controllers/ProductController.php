@@ -18,7 +18,50 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::paginate(50);
+
+        // $products=DB::table('products')
+       // ->join('brands','products.brand_id','=','brand.id')
+       // ->join('products.*','brands.name')
+       // ->get();
+
+
+        //$products=Product::get()->pluck('name');
+
+       // $products=Product::all();
+
+ //$products=Product::get()->avg('price');
+  //$products=Product::get()->max('price');
+   //$products=Product::get()->count();
+
+   $products=Product::where('status','=',1)
+   //->orwhere('price','>',20)
+   //->where('name','like','iphone 12')
+   //->whereBetweem('price',[10,100])
+   //->whereNotBetweem('price',[10,100])
+  //->WhereIn('price',[100,20,50])
+  //>WhereColumn('price','brand_id')
+
+  //where([
+   // ['price',[10,100]],
+  //  ['status','=',1],
+  //])
+
+ // whereNull('description')
+   // whereNotNull('description')
+
+  // whereDate('created_at','>','2023-06-30')
+
+  //whereYear('created_at','2023')
+  //whereMonth('created_at','06')
+    //whereDay('created_at','20')
+      //wheretime('created_at','06:45:2')
+
+      ->orderBy('id','desc')
+      //->inRandomOrder()
+
+      //skip(5)->take(5)->get()  without render
+
+       ->paginate(50);
 
         return view('products.index')
         ->with('products',$products);

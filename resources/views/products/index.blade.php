@@ -13,6 +13,7 @@
         <th>Description</th>
         <th>created_by</th>
         <th>Status</th>
+        <th>created at</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -29,6 +30,7 @@
             <td>{{$product->user?->name??"not found"}}</td>
 
             <td>{{$product->status}}</td>
+            <td>{{$product->created_at}}</td>
             <td>
 
                 <a href="{{route('products.edit',$product)}}">
@@ -38,8 +40,8 @@
                 </a>
 
                 <form method="post" action="{{route('products.destroy',$product)}}">
-                    @csrf
-                    @method('DELETE')
+                  @csrf
+                  @method('DELETE')
                     <button onclick="var result=confirm('R U sure?'); if(result){} else{event.preventDefault()}" class="btn btn-danger">Delete</button>
 
                 </form>

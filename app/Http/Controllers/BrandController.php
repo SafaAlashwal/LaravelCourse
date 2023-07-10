@@ -30,7 +30,21 @@ class BrandController extends Controller
 
     public function index()
     {
-        $brands=Brand::all();
+        $brands=Brand::
+
+        
+//        whereExists(function ($query) {
+//            $query->select(DB::raw(1))
+//                ->from('products')
+//                ->whereColumn('brands.id', 'products.brand_id');
+//        })
+
+
+//           whereIn('id',function ($query){
+//                $query->select('brand_id')
+//                    ->from('products');
+//            })
+               all();
         return view('brands.index',compact('brands'));
     }
 

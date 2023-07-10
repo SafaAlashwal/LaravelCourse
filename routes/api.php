@@ -37,3 +37,5 @@ Route::post('/logout', [AuthUserController::class, 'destroy'])
     ->name('logout');
 
  Route::middleware(['auth:sanctum'])->resource('products',ProducttController::class)->except(['index']);
+
+ ?>

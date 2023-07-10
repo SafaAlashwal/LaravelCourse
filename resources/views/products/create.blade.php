@@ -5,7 +5,7 @@
 
 <form class="mx-5"  enctype="multipart/form-data" method="post"
  action="{{route('products.store')}}">
-    @csrf
+ @{{ csrf_token() }}
 
     {{-- put and post methods --}}
     <div class="form-group">
