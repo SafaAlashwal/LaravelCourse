@@ -18,6 +18,10 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function user()
+    {
+       return $this->BelongsTo(User::class); 
+    }
     public function categories(){
         return $this->belongsToMany(Category::class,'product_categories');
     }

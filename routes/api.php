@@ -4,6 +4,9 @@
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\AuthUserController;
+use App\Http\Controllers\API\ProducttController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +31,9 @@ Route::post('/login', [AuthUserController::class, 'login'])
     ->middleware('guest')
     ->name('login');
 
-Route::resource('products',\App\Http\Controllers\API\ProductController::class);
 
 Route::post('/logout', [AuthUserController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
+ Route::middleware(['auth:sanctum'])->resource('products',ProducttController::class)->except(['index']);

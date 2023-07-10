@@ -11,6 +11,7 @@
         <th>Brand</th>
         <th>Price</th>
         <th>Description</th>
+        <th>created_by</th>
         <th>Status</th>
         <th>Actions</th>
       </tr>
@@ -25,6 +26,8 @@
     
             <td>{{$product->price}}</td>
             <td>{{$product->description}}</td>
+            <td>{{$product->user?->name??"not found"}}</td>
+
             <td>{{$product->status}}</td>
             <td>
 
