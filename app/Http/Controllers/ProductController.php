@@ -13,6 +13,38 @@ use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
+
+    public function deleted_index(){
+        $products = Product::onlyTrashed()->paginate(5);
+
+        return view('products.index')
+            ->with('deleted', 1)
+            ->with('products', $products);
+
+    }
+
+    public function restore($id)
+    {
+
+        $products = Product::onlyTrashed()->
+        where('id',$id)
+        ->restore();
+
+        toastr()->success("restore successfuly");
+        return redirect(route(('products.index')));
+
+    }
+
+    public function forceDelete($id){
+         Product::onlyTrashed()
+        ->where('id',$id)
+        ->forceDelete();
+
+        toastr()->success("forceDelete successfuly");
+        return redirect(route(('products.trashed')));
+
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -33,7 +65,8 @@ class ProductController extends Controller
   //$products=Product::get()->max('price');
    //$products=Product::get()->count();
 
-   $products=Product::where('status','=',1)
+   $products=Product::
+   //where('price','=',10)
    //->orwhere('price','>',20)
    //->where('name','like','iphone 12')
    //->whereBetweem('price',[10,100])
@@ -56,14 +89,16 @@ class ProductController extends Controller
     //whereDay('created_at','20')
       //wheretime('created_at','06:45:2')
 
-      ->orderBy('id','desc')
+      //->orderBy('id','desc')
       //->inRandomOrder()
 
       //skip(5)->take(5)->get()  without render
 
-       ->paginate(50);
+       paginate(10);
 
         return view('products.index')
+        ->with('deleted',0
+        )
         ->with('products',$products);
 
     }
@@ -139,7 +174,12 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         Storage::delete($product->image);
+
+        $product->deleted_by=auth()->id();
+        $product->save();
+
          $product->delete();
+
          toastr()->success("تم الحذف بنجاح");
          return redirect(route(('products.index')));
     }

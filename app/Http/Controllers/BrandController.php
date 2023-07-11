@@ -113,13 +113,14 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        if($brand->products->count()==0)
-        {
+        //if($brand->products->count()==0)
+        //{
             Storage::delete($brand->image);
-         $brand->delete();
+           $brand->delete();
             toastr()->success("تم الحذف بنجاح");
-        }
-        else
+       //
+     
+        //else
             toastr()->error("لم يتم الحذف بنجاح");
             return redirect(route(('brands.index')));
 
