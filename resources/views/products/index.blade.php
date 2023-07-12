@@ -25,7 +25,7 @@
         @forelse ($products as $product )
         <tr>
             <td>{{$product->name}}</td>
-            <td><img width='100' src="{{url('storage/'.$product->image)}}" alt=""></td>
+            <td><img width='100' src="{{url('storage/'.$product->image)}}"></td>
             <td>{{$product->brand?->name??"not found"}}</td>
 
     

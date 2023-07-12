@@ -18,10 +18,10 @@
      </tr>
    </thead>
    <tbody>
-       @forelse ($brands as $brand )
+       @forelse ($brands as $brand)
        <tr>
            <td>{{$brand->name}}</td>
-           <td><img width='100' src="{{url('storage/'.$brand->image)}}" alt=""></td>
+           <td><img width='100' src="{{url('storage/'.$brand->image)}}"></td>
 
            <td>
             @can('update-products')
