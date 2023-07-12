@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Notifications\InvoicePaid;
 
 class ProductObserver
 {
@@ -15,8 +16,20 @@ class ProductObserver
         ProductImage::create([
             'image'=> $product->image,
             'product_id'=> $product->id,
-
         ]);
+
+        //auth()->user()->notify(new InvoicePaid());
+
+        auth()->user()->notify(
+                        new \App\Notifications\GeneralNotification([
+                            'content'=>" تم اضافة المنتج  ".$product->name." بواسطة ".auth()->user()->name,
+                            'action_url'=>route('products.index'),
+                            'btn_text'=>"عرض المنتج",
+                            'methods'=>['database','mail'],
+                            'image'=>$product->image,
+            
+                        ])
+                    );
     }
 
     public function creating(Product $product): void

@@ -50,7 +50,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-
+        $notify=auth()->user()->notifications;
+        
         // $products=DB::table('products')
        // ->join('brands','products.brand_id','=','brand.id')
        // ->join('products.*','brands.name')
@@ -93,8 +94,8 @@ class ProductController extends Controller
       //->inRandomOrder()
 
       //skip(5)->take(5)->get()  without render
-
-       paginate(10);
+orderby('id')->
+       paginate(5);
 
         return view('products.index')
         ->with('deleted',0
