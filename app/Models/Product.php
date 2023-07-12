@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 //use App\Models\Category;
 //use App\Models\Brand;
 
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $guarded=['id','created_at'];
 
     
@@ -22,6 +24,11 @@ class Product extends Model
     {
        return $this->BelongsTo(User::class); 
     }
+    public function userWhodelete()
+    {
+       return $this->BelongsTo(User::class,'deleted_by'); 
+    }
+
     public function categories(){
         return $this->belongsToMany(Category::class,'product_categories');
     }

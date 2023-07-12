@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
 
     public function deleted_index(){
-        $products = Product::onlyTrashed()->paginate(5);
+    $products= Product::onlyTrashed()->paginate(5);
 
         return view('products.index')
             ->with('deleted', 1)
