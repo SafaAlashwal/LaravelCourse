@@ -6,6 +6,8 @@
         <h1> users</h1>
 
         <a href="{{route('users.create')}}" class="btn btn-primary mb-5 float-right"> create</a>
+        <a href="{{route('users.export')}}" class="btn btn-primary mb-5 float-right">Export to excel</a>
+
 
         <table class="table table-striped">
             <thead>

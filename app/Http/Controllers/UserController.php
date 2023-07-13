@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
+use App\Exports\UsersExport;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Traits\HasRoles;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
 //use App\Http\Controllers\Hash;
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateUserRequest;
 
 
 
@@ -23,6 +25,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function export() 
+    {
+        return Excel::download((new UsersExport())->forStatus(1)
+        ->forYear(2023), 'users.xlsx');
+    }
+    
     public function index()
     {
         //

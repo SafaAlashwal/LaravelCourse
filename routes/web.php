@@ -79,6 +79,8 @@ use App\Http\Controllers\CustomNotificationController;
     
     Route::resource('roles',RoleController::class);
     
+    Route::get('/users/export',[UserController::class,'export'])->name('users.export');
+
     Route::resource('users',UserController::class);
 
     Route::get('/sendEmail',function(){
