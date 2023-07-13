@@ -75,6 +75,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="{{Route('custom-notifications.index')}}">custom notifications</a>
                         <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>
                         <a class="collapse-item" href="{{Route('users.index')}}">Users</a>
                     </div>
@@ -252,6 +253,8 @@
     <script src={{asset("admin/js/demo/chart-area-demo.js")}}></script>
     <script src={{asset("admin/js/demo/chart-pie-demo.js")}}></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    @include('shared.fcm')
 <script>
     $(document).ready(function() {
     $('.select2').select2();
