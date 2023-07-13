@@ -15,6 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateUserRequest;
+use Dompdf\Dompdf;
 
 
 
@@ -27,8 +28,9 @@ class UserController extends Controller
      */
     public function export() 
     {
-        return Excel::download((new UsersExport())->forStatus(1)
-        ->forYear(2023), 'users.xlsx');
+        return Excel::download((new UsersExport())
+        ->forStatus(1)
+        ->forYear(2023),'users.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     }
     
     public function index()
