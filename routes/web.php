@@ -1,8 +1,10 @@
 <?php
 
+use App\Mail\testEmail;
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BrandController;
@@ -42,6 +44,11 @@ use App\Http\Controllers\CustomNotificationController;
     })->middleware(['auth', 'verified'])->name('dashboard');
     
     Route::middleware('auth')->group(function () {
+
+        Route::get('fcm_token', [CustomNotificationController::class, 'fcm_token'])
+        ->name('fcm_token');
+        Route::resource('custom-notifications',CustomNotificationController::class);
+    
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -74,8 +81,14 @@ use App\Http\Controllers\CustomNotificationController;
     
     Route::resource('users',UserController::class);
 
-    Route::resource('custom-notifications',CustomNotificationController::class);
+    Route::get('/sendEmail',function(){
+        Mail::to('s93887882@gmail.com')
+        ->send(new testEmail(['title'=>"test Change data"]));
 
+        return '<h1>Email sended</h1>';
+    });
+
+ 
 
 });
     

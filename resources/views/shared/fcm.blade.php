@@ -65,6 +65,7 @@
                 setCookie('fcm_token', token, 7);
 
                 $.ajax({
+                    ////save by ajax
                     url: "{{route('fcm_token')}}",
                     data: {
                         token: token,
