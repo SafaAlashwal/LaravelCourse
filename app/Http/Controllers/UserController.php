@@ -4,22 +4,20 @@ namespace App\Http\Controllers;
 
 
 
+use Dompdf\Dompdf;
 use App\Models\Role;
 use App\Models\User;
 use App\Exports\UsersExport;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+//use App\Http\Controllers\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Traits\HasRoles;
-//use App\Http\Controllers\Hash;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateUserRequest;
-use Dompdf\Dompdf;
-
-
-
-
+use mysql_xdevapi\Exception;
 
 class UserController extends Controller
 {
@@ -31,7 +29,33 @@ class UserController extends Controller
         return Excel::download((new UsersExport())
         ->forStatus(1)
         ->forYear(2023),'users.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        //->forYear(2023),'users.xlsx');
+        //->forYear(2023),'users.html', \Maatwebsite\Excel\Excel::HTML);
     }
+    
+    public function import(Request $request) 
+    {
+        $path='';
+        if($request->hasFile('file'))
+        $path=$request->file('file')->store('imports');
+
+         if($path!=""){
+            try{
+                Excel::import(new UsersImport, 'storage/'.$path);
+        
+                toastr()->success('تم الاستيراد بنجاح');
+            }
+            catch(Exception $ex)
+            {
+                toastr()->error($ex->getMessage());
+            }
+   
+         }
+            return redirect(route('users.index')); 
+          
+    
+    }
+      
     
     public function index()
     {

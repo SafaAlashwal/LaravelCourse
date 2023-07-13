@@ -7,7 +7,10 @@
 
         <a href="{{route('users.create')}}" class="btn btn-primary mb-5 float-right"> create</a>
         <a href="{{route('users.export')}}" class="btn btn-primary mb-5 float-right">Export to excel</a>
-
+        <button type="button" class="btn btn-primary mb-5" data-toggle="modal" data-target="#exampleModal">
+            Import
+          </button>
+          
 
         <table class="table table-striped">
             <thead>
@@ -72,4 +75,46 @@
             {!! $users->render() !!}
         </div>
     </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+
+        <form class="mx-5" method="post"
+         enctype="multipart/form-data" 
+         action="{{route('users.import')}}">
+                @csrf
+        <div class="modal-body">
+
+    {{-- put and post methods --}}
+
+
+    <div class="form-group">
+        <label for="file">Excel File:</label>
+        <input type="file" required accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+         class="form-control @error('file') is-invalid @enderror"  name="file" id="file" value="{{old('file')}}">
+      </div>
+      @error('file')
+      <div class="alert alert-danger">{{$message}}</div>
+
+      @enderror
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Import</button>
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
 @endsection
